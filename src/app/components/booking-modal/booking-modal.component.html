@@ -18,7 +18,7 @@
                             id="guestName" 
                             formControlName="guestName" 
                             class="form-control" 
-                            placeholder="e.g., Jane Doe"
+                            placeholder="Full Name"
                             [ngClass]="{'is-invalid': bookingForm.get('guestName')?.invalid && bookingForm.get('guestName')?.touched}">
                         <div *ngIf="bookingForm.get('guestName')?.hasError('required') && bookingForm.get('guestName')?.touched" class="invalid-feedback">
                             Guest Name is required.
