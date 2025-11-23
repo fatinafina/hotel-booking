@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <span class="h4 mb-0 ms-2 text-primary">Embun Stays</span>
+    </a>
+    
+    <div class="d-flex align-items-center">
+      
+      <div class="dropdown"> 
+        <button 
+            class="btn btn-outline-secondary border-0" 
+            type="button" 
+            id="filterDropdown"
+            (click)="toggleFilterDropdown(); $event.stopPropagation()">
+          <i class="bi bi-funnel-fill"></i> Filter 
+        </button>
+        
+        <div 
+            class="dropdown-menu dropdown-menu-end p-3 me-n2  fixed-filter-dropdown" 
+            [class.show]="isFilterDropdownOpen"
+            aria-labelledby="filterDropdown" 
+            style="min-width: 250px;">
+            <app-filter-panel 
+              (filterChange)="onFilterApplied($event)"
+              (closePanel)="toggleFilterDropdown()"> 
+            </app-filter-panel>
+        </div>
+      </div>
+            
+    </div>
+  </div>
+</nav>
+
+<app-room-list></app-room-list>

@@ -1,0 +1,64 @@
+<div class="container my-4">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h1 class="display-4">Available Rooms</h1>
+      <p class="lead">Find your perfect space for a relaxing getaway</p>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Fetching rooms...</p>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" *ngIf="!isLoading">
+      <div class="col" *ngFor="let room of (rooms$ | async)">
+          <app-room-card 
+              [room]="room" 
+              (book)="openBookingModal($event)">
+          </app-room-card>
+      </div>
+  </div>
+    
+  <div *ngIf="!(rooms$ | async) || (rooms$ | async)?.length === 0 && !isLoading" class="alert alert-warning mt-4">
+    No rooms are currently available. Please check back later.
+  </div>
+
+  <app-booking-modal
+    [isVisible]="isModalVisible"
+    [room]="selectedRoom"
+    (close)="closeBookingModal()"
+    (bookingConfirmed)="onBookingConfirmed($event)">
+  </app-booking-modal>
+
+    <div 
+        class="toast text-white border-0 position-fixed top-0 end-0 m-3" 
+        style="background-color: #285A48;" 
+        role="alert" 
+        aria-live="assertive" 
+        aria-atomic="true"
+        [ngClass]="{'show': bookingSuccess}">
+        
+        <div class="d-flex align-items-center p-3">
+        
+            <i class="bi bi-check-circle-fill fs-2 me-3"></i> 
+            
+            <div class="me-auto">
+                <strong class="fs-6 d-block">Booking Confirmed!</strong>
+                <small style="font-size: 0.85rem;">
+                Thank you for booking with Serene Stays. We notified your executive.
+                </small>
+            </div>
+            
+            <button 
+                type="button" 
+                class="btn-close btn-close-white ms-3" 
+                data-bs-dismiss="toast" 
+                aria-label="Close" 
+                (click)="bookingSuccess = false">
+            </button>
+        </div>
+    </div>
+</div> 

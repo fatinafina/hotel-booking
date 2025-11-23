@@ -1,0 +1,69 @@
+<div 
+    class="modal" 
+    [ngClass]="{'show d-block': isVisible}" 
+    tabindex="-1" 
+    role="dialog" 
+    *ngIf="isVisible && room" 
+    (click)="closeModal()">
+  
+    <div class="modal-dialog modal-dialog-centered" role="document" (click)="$event.stopPropagation()">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+
+                    <div class="mb-3">
+                        <label for="guestName" class="form-label">Full Name</label>
+                        <input 
+                            type="text" 
+                            id="guestName" 
+                            formControlName="guestName" 
+                            class="form-control" 
+                            placeholder="e.g., Jane Doe"
+                            [ngClass]="{'is-invalid': bookingForm.get('guestName')?.invalid && bookingForm.get('guestName')?.touched}">
+                        <div *ngIf="bookingForm.get('guestName')?.hasError('required') && bookingForm.get('guestName')?.touched" class="invalid-feedback">
+                            Guest Name is required.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="checkInDate" class="form-label">Check-in Date</label>
+                        <input 
+                            type="date" 
+                            id="checkInDate" 
+                            formControlName="checkInDate" 
+                            class="form-control"
+                            [ngClass]="{'is-invalid': bookingForm.get('checkInDate')?.invalid && bookingForm.get('checkInDate')?.touched}">
+                        <div *ngIf="bookingForm.get('checkInDate')?.hasError('required') && bookingForm.get('checkInDate')?.touched" class="invalid-feedback">
+                            Check-in Date is required.
+                        </div>
+                        <div *ngIf="bookingForm.get('checkInDate')?.hasError('pastDate') && bookingForm.get('checkInDate')?.touched" class="invalid-feedback">
+                            Check-in Date cannot be in the past.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="checkOutDate" class="form-label">Check-out Date</label>
+                        <input 
+                            type="date" 
+                            id="checkOutDate" 
+                            formControlName="checkOutDate" 
+                            class="form-control"
+                            [ngClass]="{'is-invalid': bookingForm.get('checkOutDate')?.invalid && bookingForm.get('checkOutDate')?.touched}">
+                        <div *ngIf="bookingForm.get('checkOutDate')?.hasError('required') && bookingForm.get('checkOutDate')?.touched" class="invalid-feedback">
+                            Check-out Date is required.
+                        </div>
+                        <div *ngIf="bookingForm.get('checkOutDate')?.hasError('pastDate') && bookingForm.get('checkOutDate')?.touched" class="invalid-feedback">
+                            Check-out Date must be valid.
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer px-0">
+                        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="bookingForm.invalid">Confirm Booking</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade show" *ngIf="isVisible"></div>

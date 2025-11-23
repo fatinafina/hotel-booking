@@ -1,0 +1,84 @@
+/* src/styles.css */
+
+/* Import Bootstrap CSS */
+/* Ensure this is correctly imported in angular.json or styles.css/scss */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Custom Variables (Optional, but good practice for branding) */
+:root {
+  --color-primary: #856149;      /* Muted Gold/Brown for Brand Accent (Serene Stays) */
+  --color-secondary: #B0C4DE;    /* Light steel blue */
+  --color-dark: #333333;         /* Deep Gray for primary text */
+  --color-light-bg: #F8F8F8;     /* Very subtle off-white background */
+  --color-white: #FFFFFF;
+}
+
+/* Body and Global Typography */
+body {
+  font-family: 'Georgia', 'Times New Roman', serif; /* Elegant Serif Font */
+  background-color: var(--color-light-bg); 
+  color: var(--color-dark);
+}
+
+/* Customizing Bootstrap's Primary Button/Brand Color */
+/* This will affect btn-primary, text-primary, bg-primary */
+.btn-primary,
+.bg-primary,
+.text-primary,
+.navbar-brand .text-primary {
+  --bs-btn-bg: var(--color-primary);
+  --bs-btn-border-color: var(--color-primary);
+  --bs-btn-hover-bg: #6E4E37; 
+  --bs-btn-hover-border-color: #6E4E37;
+  --bs-btn-active-bg: #553A26;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Georgia', serif;
+    font-weight: 700;
+}
+
+/* Navbar specific styling */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em; /* Add slight spacing for a premium feel */
+}
+
+/* Adjusting Card Shadow for consistency with design */
+.card {
+  border: 1px solid #EAEAEA; /* Subtle border for definition */
+  border-radius: 8px; /* Slightly tighter radius than 0.75rem */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card.shadow-sm {
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important; /* Bootstrap default sm */
+}
+
+/* Customizing the Available/Booked Badges */
+.badge.bg-success {
+    background-color: #38761D !important; /* Deeper Green */
+}
+.badge.bg-secondary {
+    background-color: #595959 !important; /* Darker Gray for 'Booked' */
+}
+/* Modal backdrop for better visibility */
+.modal-backdrop.show {
+    opacity: 0.5; /* Default Bootstrap opacity is 0.5, can adjust if needed */
+}
+
+/* Toast Notification Styling */
+.toast {
+  min-width: 250px;
+}
+
+/* Responsive adjustments (mostly handled by Bootstrap grid) */
+/* This is an example if you needed specific breakpoints */
+@media (min-width: 992px) {
+  /* Larger screens */
+  .container {
+    max-width: 1200px; /* Adjust max-width of container for larger screens */
+  }
+}

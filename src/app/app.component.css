@@ -1,0 +1,14 @@
+.fixed-filter-dropdown {
+  position: fixed !important;
+  top: 60px;
+  right: 20px;
+  z-index: 2000;
+  width: 260px;
+  padding: 20px;        
+  min-height: 250px;   
+}
+
+.text-primary {
+    --bs-text-opacity: 1;
+    color: rgb(21 25 29) !important;
+}
